@@ -104,11 +104,11 @@ export default function AdminLayout({
     }
 
     if (
-        (insightQuery.error as AxiosError<{ error: string }>)?.response?.data
-            .error === "Unauthorized" ||
         ((insightQuery.error as AxiosError<{ error: string }>)?.response?.data
-            .error === "Bad Request" &&
-            !match(pathname, "/regex:[a-z]{2}/admin"))
+            .error === "Unauthorized" ||
+            (insightQuery.error as AxiosError<{ error: string }>)?.response
+                ?.data.error === "Bad Request") &&
+        !match(pathname, "/regex:[a-z]{2}/admin")
     ) {
         router.push(getLocalizedPath("/admin"));
         return;
